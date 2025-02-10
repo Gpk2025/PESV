@@ -1,0 +1,68 @@
+document.getElementById('encuestaForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Obtener respuestas
+    const respuestas = {
+        nombre_empresa: document.getElementById('nombre_empresa').value,
+        actividad_principal: document.getElementById('actividad_principal').value,
+        total_empleados: parseInt(document.getElementById('total_empleados').value),
+        vehiculos_automotores: parseInt(document.getElementById('vehiculos_automotores').value),
+        vehiculos_no_automotores: parseInt(document.getElementById('vehiculos_no_automotores').value),
+        empleados_desplazan: parseInt(document.getElementById('empleados_desplazan').value),
+        transporte_publico: document.getElementById('transporte_publico').value.toLowerCase(),
+        rutas_transporte: document.getElementById('rutas_transporte').value.toLowerCase(),
+        capacitaciones: document.getElementById('capacitaciones').value.toLowerCase(),
+        mantenimiento: document.getElementById('mantenimiento').value.toLowerCase(),
+        politicas: document.getElementById('politicas').value.toLowerCase(),
+        seguimiento: document.getElementById('seguimiento').value.toLowerCase(),
+        falencias_detectadas: document.getElementById('falencias_detectadas').value.toLowerCase(),
+        descripcion_falencias: document.getElementById('descripcion_falencias').value,
+    };
+
+    // Determinar si necesita PESV
+    const necesitaPESV = (respuestas.vehiculos_automotores > 0 || 
+                         respuestas.vehiculos_no_automotores > 0 || 
+                         respuestas.empleados_desplazan > 0 || 
+                         respuestas.transporte_publico === "sí" || 
+                         respuestas.rutas_transporte === "sí");
+
+    // Determinar el nivel
+    let nivel = "";
+    if (respuestas.vehiculos_automotores <= 10 && respuestas.empleados_desplazan <= 50) {
+        nivel = "Básico";
+    } else if ((respuestas.vehiculos_automotores >= 11 && respuestas.vehiculos_automotores <= 50) || 
+               (respuestas.empleados_desplazan >= 51 && respuestas.empleados_desplazan <= 100)) {
+        nivel = "Medio";
+    } else {
+        nivel = "Avanzado";
+    }
+
+    // Identificar falencias
+    const falencias = [];
+    if (respuestas.capacitaciones === "no") falencias.push("Falta de capacitaciones en seguridad vial.");
+    if (respuestas.mantenimiento === "no") falencias.push("Falta de un programa de mantenimiento preventivo.");
+    if (respuestas.politicas === "no") falencias.push("Falta de políticas o protocolos de seguridad vial.");
+    if (respuestas.seguimiento === "no") falencias.push("Falta de seguimiento y evaluación de incidentes viales.");
+    if (respuestas.falencias_detectadas === "sí") falencias.push("Falencias adicionales: " + respuestas.descripcion_falencias);
+
+    // Mostrar resultados
+    let resultadoHTML = `<h2>Resultados</h2>
+                         <p><strong>Empresa:</strong> ${respuestas.nombre_empresa}</p>
+                         <p><strong>Actividad principal:</strong> ${respuestas.actividad_principal}</p>
+                         <p><strong>Total de empleados:</strong> ${respuestas.total_empleados}</p>`;
+
+    if (necesitaPESV) {
+        resultadoHTML += `<p><strong>Tu empresa necesita un PESV.</strong></p>
+                          <p><strong>Nivel:</strong> ${nivel}</p>
+                          <p><strong>Falencias detectadas:</strong></p>
+                          <ul>`;
+        falencias.forEach(falencia => {
+            resultadoHTML += `<li>${falencia}</li>`;
+        });
+        resultadoHTML += `</ul>`;
+    } else {
+        resultadoHTML += `<p><strong>Tu empresa no necesita un PESV.</strong></p>`;
+    }
+
+    document.getElementById('resultado').innerHTML = resultadoHTML;
+});
