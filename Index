@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta PESV</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Encuesta PESV</h1>
+        <form id="encuestaForm">
+            <label for="nombre_empresa">Nombre de la empresa:</label>
+            <input type="text" id="nombre_empresa" required>
+
+            <label for="actividad_principal">Actividad principal:</label>
+            <input type="text" id="actividad_principal" required>
+
+            <label for="total_empleados">Número total de empleados:</label>
+            <input type="number" id="total_empleados" required>
+
+            <label for="vehiculos_automotores">Número de vehículos automotores:</label>
+            <input type="number" id="vehiculos_automotores" required>
+
+            <label for="vehiculos_no_automotores">Número de vehículos no automotores (motos, bicicletas, etc.):</label>
+            <input type="number" id="vehiculos_no_automotores" required>
+
+            <label for="empleados_desplazan">Número de empleados que se desplazan en moto, bicicleta o a pie:</label>
+            <input type="number" id="empleados_desplazan" required>
+
+            <label for="transporte_publico">¿Realiza actividades de transporte público o comercial? (Sí/No):</label>
+            <input type="text" id="transporte_publico" required>
+
+            <label for="rutas_transporte">¿Cuenta con rutas de transporte para empleados o clientes? (Sí/No):</label>
+            <input type="text" id="rutas_transporte" required>
+
+            <label for="capacitaciones">¿Realiza capacitaciones en seguridad vial? (Sí/No):</label>
+            <input type="text" id="capacitaciones" required>
+
+            <label for="mantenimiento">¿Cuenta con un programa de mantenimiento preventivo? (Sí/No):</label>
+            <input type="text" id="mantenimiento" required>
+
+            <label for="politicas">¿Tiene políticas o protocolos de seguridad vial? (Sí/No):</label>
+            <input type="text" id="politicas" required>
+
+            <label for="seguimiento">¿Realiza seguimiento y evaluación de incidentes viales? (Sí/No):</label>
+            <input type="text" id="seguimiento" required>
+
+            <label for="falencias_detectadas">¿Ha identificado falencias en seguridad vial en su empresa? (Sí/No):</label>
+            <input type="text" id="falencias_detectadas" required>
+
+            <label for="descripcion_falencias">Describa las falencias:</label>
+            <textarea id="descripcion_falencias"></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="resultado"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
